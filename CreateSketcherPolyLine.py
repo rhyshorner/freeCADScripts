@@ -50,12 +50,18 @@ if(data != None):
 
     # foreach row in data (list of X Y Z coorindates)
     xPrevious, yPrevious, zPrevious = data[0]
+    lineNumber = sketch.GeometryCount
+    firstLoop = True
     for row in data:
-        x, y, z = row[1]
-        sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
-        sketch.addConstraint(Sketcher.Constraint("Coincident", 1, 2, 2, 1))
-        xPrevious, yPrevious, zPrevious = row
-
+        if(not firstLoop):
+            x, y, z = row
+            sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
+            sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
+            xPrevious, yPrevious, zPrevious = row
+            print(f"from:{xPrevious},{yPrevious},{zPrevious} to:{x},{y},{z}")
+            theDocument.recompute()
+        firstLoop = False
+    
     theDocument.recompute()
 
     # constrains the first lines ending vertex to the second lines starting vertex
