@@ -58,10 +58,8 @@ if(data != None):
             sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
             sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
             xPrevious, yPrevious, zPrevious = row
-            print(f"from:{xPrevious},{yPrevious},{zPrevious} to:{x},{y},{z}")
-            theDocument.recompute()
         firstLoop = False
-    
+
     theDocument.recompute()
 
     # constrains the first lines ending vertex to the second lines starting vertex
