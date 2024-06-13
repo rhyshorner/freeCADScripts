@@ -69,3 +69,15 @@ if(data != None):
     """
     App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Coincident',0,2,1,1))
     """
+
+
+'''
+# a more, apparently, efficient attempt
+x_values, y_values, z_values = zip(*data)  # Efficiently unpack data into separate lists
+
+for i in range(1, len(data)):  # Skip the first row as before
+    sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x_values[i], y_values[i], z_values[i])), False)
+    sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
+
+    xPrevious, yPrevious, zPrevious = x_values[i], y_values[i], z_values[i]
+'''
