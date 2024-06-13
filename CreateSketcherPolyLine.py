@@ -24,7 +24,13 @@ def read_csv_file(filename):
         return None
     return data
 
+def remove_every_third_row(data):
+    # Remove every third row from the data
+    return [row for i, row in enumerate(data) if (i + 1) % 3 != 0]
 
+def remove_every_second_row(data):
+    # Remove every second row from the data
+    return [row for i, row in enumerate(data) if (i + 1) % 2 != 0]
 
 # create the FreeCAD document 
 theDocument = App.newDocument()  
@@ -36,6 +42,9 @@ sketch = theDocument.addObject("Sketcher::SketchObject", "Sketch")
 file_dialog = QtGui.QFileDialog()
 csv_file_path = file_dialog.getOpenFileName()[0]
 data = read_csv_file(csv_file_path)
+
+#data = remove_every_third_row(data)
+data = remove_every_second_row(data)
 
 # file has been found and data exists
 if(data != None):
@@ -50,7 +59,7 @@ if(data != None):
 
     # foreach row in data (list of X Y Z coorindates)
     xPrevious, yPrevious, zPrevious = data[0]
-    lineNumber = sketch.GeometryCount
+    #lineNumber = sketch.GeometryCount
     firstLoop = True
     for row in data:
         if(not firstLoop):
