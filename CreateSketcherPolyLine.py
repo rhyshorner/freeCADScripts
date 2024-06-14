@@ -28,9 +28,17 @@ def remove_every_third_row(data):
     # Remove every third row from the data
     return [row for i, row in enumerate(data) if (i + 1) % 3 != 0]
 
+def keep_only_every_nth_row(data, rowNumberToKeep):
+    # Step value of 3 to pick every third element
+    return data[::rowNumberToKeep]
+
 def keep_only_every_third_row(data):
     # Step value of 3 to pick every third element
     return data[::3]
+
+def keep_only_every_second_row(data):
+    # Step value of 3 to pick every third element
+    return data[::2]
 
 def remove_every_second_row(data):
     # Remove every second row from the data
