@@ -56,7 +56,7 @@ csv_file_path = file_dialog.getOpenFileName()[0]
 data = read_csv_file(csv_file_path)
 
 #data = remove_every_third_row(data)
-data = remove_every_second_row(data)
+data = keep_only_every_nth_row(data)
 
 # file has been found and data exists
 if(data != None):
@@ -79,6 +79,7 @@ if(data != None):
             print(f"from:{xPrevious, yPrevious, zPrevious} to:{row}")
             sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
             sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
+            sketch.addConstraint(Sketcher.Constraint('Distance',sketch.GeometryCount-1,2,-1,y))
             xPrevious, yPrevious, zPrevious = row
         firstLoop = False
 
