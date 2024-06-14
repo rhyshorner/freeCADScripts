@@ -28,6 +28,10 @@ def remove_every_third_row(data):
     # Remove every third row from the data
     return [row for i, row in enumerate(data) if (i + 1) % 3 != 0]
 
+def keep_only_every_third_row(data):
+    # Step value of 3 to pick every third element
+    return data[::3]
+
 def remove_every_second_row(data):
     # Remove every second row from the data
     return [row for i, row in enumerate(data) if (i + 1) % 2 != 0]
@@ -64,6 +68,7 @@ if(data != None):
     for row in data:
         if(not firstLoop):
             x, y, z = row
+            print(f"from:{xPrevious, yPrevious, zPrevious} to:{row}")
             sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
             sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
             xPrevious, yPrevious, zPrevious = row
