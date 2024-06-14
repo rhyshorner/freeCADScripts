@@ -24,25 +24,9 @@ def read_csv_file(filename):
         return None
     return data
 
-def remove_every_third_row(data):
-    # Remove every third row from the data
-    return [row for i, row in enumerate(data) if (i + 1) % 3 != 0]
-
 def keep_only_every_nth_row(data, rowNumberToKeep):
     # Step value of 3 to pick every third element
     return data[::rowNumberToKeep]
-
-def keep_only_every_third_row(data):
-    # Step value of 3 to pick every third element
-    return data[::3]
-
-def keep_only_every_second_row(data):
-    # Step value of 3 to pick every third element
-    return data[::2]
-
-def remove_every_second_row(data):
-    # Remove every second row from the data
-    return [row for i, row in enumerate(data) if (i + 1) % 2 != 0]
 
 # create the FreeCAD document 
 theDocument = App.newDocument()  
@@ -56,7 +40,7 @@ csv_file_path = file_dialog.getOpenFileName()[0]
 data = read_csv_file(csv_file_path)
 
 #data = remove_every_third_row(data)
-data = keep_only_every_nth_row(data)
+data = keep_only_every_nth_row(data, 50)
 
 # file has been found and data exists
 if(data != None):
@@ -79,7 +63,10 @@ if(data != None):
             print(f"from:{xPrevious, yPrevious, zPrevious} to:{row}")
             sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x, y, z)), False)
             sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
-            sketch.addConstraint(Sketcher.Constraint('Distance',sketch.GeometryCount-1,2,-1,y))
+            x_axis = -2
+            sketch.addConstraint(Sketcher.Constraint('Distance',sketch.GeometryCount-1,2,x_axis,x))
+            y_axis = -1
+            sketch.addConstraint(Sketcher.Constraint('Distance',sketch.GeometryCount-1,2,y_axis,y))
             xPrevious, yPrevious, zPrevious = row
         firstLoop = False
 
@@ -92,15 +79,3 @@ if(data != None):
     """
     App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Coincident',0,2,1,1))
     """
-
-
-'''
-# a more, apparently, efficient attempt
-x_values, y_values, z_values = zip(*data)  # Efficiently unpack data into separate lists
-
-for i in range(1, len(data)):  # Skip the first row as before
-    sketch.addGeometry(Part.LineSegment(App.Vector(xPrevious, yPrevious, zPrevious), App.Vector(x_values[i], y_values[i], z_values[i])), False)
-    sketch.addConstraint(Sketcher.Constraint("Coincident", sketch.GeometryCount-2, 2, sketch.GeometryCount-1, 1))
-
-    xPrevious, yPrevious, zPrevious = x_values[i], y_values[i], z_values[i]
-'''
