@@ -54,3 +54,38 @@ if(data != None):
         firstLoop = False
 
     theDocument.recompute()
+
+
+"""
+App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(0.000000,0.000000,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Weight',0,1.000000)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Coincident',0,3,-1,1)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(28.306892,4.761905,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,1)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(49.735443,15.343916,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,2)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(75.396828,35.185188,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,3)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(94.444435,16.137564,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,4)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(118.518509,5.555558,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,5)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.Circle(App.Vector(147.354492,0.000000,0),App.Vector(0,0,1),10),True)
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('Equal',0,6)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(Sketcher.Constraint('PointOnObject',6,3,-1)) 
+>>> App.getDocument('Unnamed').getObject('Sketch').addGeometry(Part.BSplineCurve([App.Vector(0,0),App.Vector(28.3069,4.7619),App.Vector(49.7354,15.3439),App.Vector(75.3968,35.1852),App.Vector(94.4444,16.1376),App.Vector(118.519,5.55556),App.Vector(147.354,0)],None,None,False,3,None,False),False)
+>>> conList = []
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',0,3,7,0))
+0 is the point number, 3 is ?, 7 is the last point number+1, 0 is the current point number
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',1,3,7,1))
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',2,3,7,2))
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',3,3,7,3))
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',4,3,7,4))
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',5,3,7,5))
+>>> conList.append(Sketcher.Constraint('InternalAlignment:Sketcher::BSplineControlPoint',6,3,7,6))
+>>> App.getDocument('Unnamed').getObject('Sketch').addConstraint(conList)
+>>> del conList
+>>> 
+>>> App.getDocument('Unnamed').getObject('Sketch').exposeInternalGeometry(7)
+"""
+
