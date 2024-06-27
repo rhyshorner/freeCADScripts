@@ -22,6 +22,7 @@ sketch.addConstraint(Sketcher.Constraint('Equal',0,1))
 
 theCircle = sketch.addGeometry(Part.Circle(App.Vector(49.7354,15.3439,0),App.Vector(0,0,1),10),True)
 print(f"theCircle: {theCircle}")
+theDocument.removeObject(theCircle)
 sketch.addConstraint(Sketcher.Constraint('Equal',0,2)) 
 # try to delete the circle
 
