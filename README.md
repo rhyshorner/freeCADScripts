@@ -19,7 +19,7 @@ parameter 3 (radius):
 
 sketch.addGeometry(theSecondCircle, True)
 parameter 1:
-    is a Part.Circle object 
+    is a Part object 
 parameter 2: 
     bool, determines if geometry is a construction or not (True is construction geometry)
 
