@@ -38,3 +38,25 @@ parameter 4 and 5:
         0: Refers to the Origin.
         -1: Refers to the horizontal axis (X-axis).
         -2: Refers to the vertical axis (Y-axis).
+
+b = Part.BSplineCurve([
+    FreeCAD.Vector(0, 0),
+    FreeCAD.Vector(28.307, 4.762),
+    FreeCAD.Vector(49.735, 15.344),
+    FreeCAD.Vector(75, 5)
+], None, None, False, 3, None, False)
+parameter 1: 
+    a list of control points. In your example, these are the vectors (0, 0), (28.307, 4.762), (49.735, 15.344), and (75, 5).
+parameter 2: 
+    the knot vector. Since it’s set to None, the constructor will generate a uniform knot vector automatically.
+parameter 3: 
+    the multiplicity vector. Again, it’s set to None, so the constructor will compute it based on the degree of the curve.
+parameter 4: 
+    (False) specifies whether the curve is closed. In your case, it’s not a closed curve.
+parameter:
+    The fifth argument (3) represents the degree of the B-spline curve. Higher degrees allow more flexibility in shaping the curve.
+parameter:
+    The sixth argument is the parameter range. Since it’s set to None, the constructor will use the default parameter range.
+parameter:
+    The seventh argument (False) determines whether the curve is periodic. For your example, it’s not periodic.
+In summary, your b object represents a B-spline curve defined by the given control points, with a degree of 3, and it’s not closed or periodic
