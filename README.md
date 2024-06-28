@@ -13,7 +13,7 @@ theSecondCircle = Part.Circle(Center=FreeCAD.Vector(28.307,4.762,0), Normal=Free
 paramter 1 (Center):
     location of the center of the circle
 parameter 2 (Normal):
-    
+    Specifies the orientation of the circle, (0,0,1) means the circle lies in the XY plane with its center at the origin and its normal vector pointing in the positive Z direction
 parameter 3 (radius):
     the radius of the circle
 
