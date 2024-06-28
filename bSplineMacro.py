@@ -1,4 +1,4 @@
-import FreeCAD as App
+import FreeCAD
 from PySide import QtGui
 import Part
 import Sketcher
@@ -12,12 +12,13 @@ import csv
 
 
 # create the FreeCAD document 
-theDocument = App.newDocument()  
+theDocument = FreeCAD.newDocument()  
 sketch = theDocument.addObject("Sketcher::SketchObject", "MacroSketch")
 
 # the meat
 """The first loop"""
-theID = sketch.addGeometry(Part.Circle(App.Vector(0.000000,0.000000,0),App.Vector(0,0,1),10),True)
+theFirstCircle = Part.Circle(FreeCAD.Vector(0.000000,0.000000,0),FreeCAD.Vector(0,0,1),10)
+theID = sketch.addGeometry(theFirstCircle, True)
 print(f"theCircle: {theID}")
 # theID = sketch.addConstraint(Sketcher.Constraint('Weight',0,1.000000))
 # print(f"theWeightConstraint: {theID}")
@@ -25,29 +26,30 @@ theID = sketch.addConstraint(Sketcher.Constraint('Coincident',0,3,-1,1))
 print(f"theConstraint: {theID}")
 
 """The second loop"""
-theID = sketch.addGeometry(Part.Circle(App.Vector(28.307,4.762,0),App.Vector(0,0,1),10),True)
-print(f"theCircle: {theID}")
+theSecondCircle = Part.Circle(Center=FreeCAD.Vector(28.307,4.762,0), Normal=FreeCAD.Vector(0,0,1), Radius=10)
+theGeometryID = sketch.addGeometry(theSecondCircle, True)
+print(f"theCircle: {theGeometryID}")
 theID = sketch.addConstraint(Sketcher.Constraint('Equal',0,1)) 
 print(f"theConstraint: {theID}")
 
 """The third loop"""
-theID = sketch.addGeometry(Part.Circle(App.Vector(49.7354,15.344,0),App.Vector(0,0,1),10),True)
+theID = sketch.addGeometry(Part.Circle(FreeCAD.Vector(49.7354,15.344,0),FreeCAD.Vector(0,0,1),10),True)
 print(f"theCircle: {theID}")
 theID = sketch.addConstraint(Sketcher.Constraint('Equal',0,2))
 print(f"theConstraint: {theID}") 
 
 """The final loop"""
-theID = sketch.addGeometry(Part.Circle(App.Vector(75,5,0),App.Vector(0,0,1),10),True)
+theID = sketch.addGeometry(Part.Circle(FreeCAD.Vector(75,5,0),FreeCAD.Vector(0,0,1),10),True)
 print(f"theCircle: {theID}")
 theID = sketch.addConstraint(Sketcher.Constraint('Equal',0,3))
 print(f"theConstraint: {theID}") 
 
 # create the bspline and then add the geometry
 b = Part.BSplineCurve([
-    App.Vector(0, 0),
-    App.Vector(28.307, 4.762),
-    App.Vector(49.735, 15.344),
-    App.Vector(75, 5)
+    FreeCAD.Vector(0, 0),
+    FreeCAD.Vector(28.307, 4.762),
+    FreeCAD.Vector(49.735, 15.344),
+    FreeCAD.Vector(75, 5)
 ], None, None, False, 3, None, False)
 sketch.addGeometry(b, False)
 print(f"object:{b}, startPoint:{b.StartPoint}, endpoint:{b.EndPoint}")
